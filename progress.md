@@ -132,3 +132,30 @@ Original prompt: Very nice! Let's also not name them Juventus and Milan. Come up
 ## Club-identity TODO
 
 - None.
+
+---
+
+## Current objective: align pitch entities with the field lines
+
+Original prompt: I think I've found a visual bug. It seems the field lines are not correctly placed. They are often playing outside the goal line for example
+
+## Pitch-coordinate progress
+
+- Reproduced the bug at kickoff and during open play: the 0–105 by 0–68 simulation coordinates filled the entire pitch container while the painted field occupied only the inset 7–93% area.
+- At 27:28, both goalkeeper centers were outside their painted goal lines; Rookhaven's goalkeeper was at a valid simulation x-position of 102.06 but rendered 38px beyond the line.
+- Added a focused projection regression at the same coordinate seam used by `Pitch.svelte`.
+- Confirmed the regression failed against the original full-container mapping, then passed after applying the shared 7–93% field projection.
+- Projected players, ball, movement targets, pass and second-ball markers, restart zones, intent arrows, and the offside line into the painted field.
+- The field outline, halfway line, penalty areas, six-yard boxes, and offside-line height now consume the same inset constant as the entity projection.
+- Desktop browser QA found no out-of-bounds entities at kickoff or during open play, including a player at simulation x=104.07.
+- Mobile browser QA found no out-of-bounds entities or horizontal page overflow at 390px.
+- The required web-game client captured a selected goalkeeper correctly inside the goal line, with matching deterministic state and no console-error artifact.
+
+## Pitch-coordinate verification
+
+- Passed `npm run test:pitch-geometry`, `npm test`, `npm run build`, `npm run demo:build`, and `git diff --check`.
+- Browser console remained clean.
+
+## Pitch-coordinate TODO
+
+- None.

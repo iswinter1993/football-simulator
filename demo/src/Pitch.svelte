@@ -2,20 +2,16 @@
     import { createEventDispatcher } from 'svelte';
     import { Position } from '$simulator/enums/Position.ts';
     import type { MatchSnapshot, TeamSide } from '$simulator/RealTimeEngine.ts';
+    import {
+        FIELD_INSET_PERCENT,
+        pitchXPercent as x,
+        pitchYPercent as y,
+    } from './pitchGeometry';
 
     export let snapshot: MatchSnapshot;
     export let selectedPlayerId = '';
 
     const dispatch = createEventDispatcher<{ selectPlayer: { id: string } }>();
-    const pitch = { length: 105, width: 68 };
-
-    function x(value: number): number {
-        return value / pitch.length * 100;
-    }
-
-    function y(value: number): number {
-        return value / pitch.width * 100;
-    }
 
     function isSetPiece(phase: string): boolean {
         return ['throw_in', 'corner', 'goal_kick', 'free_kick', 'penalty'].includes(phase);
@@ -53,7 +49,7 @@
     $: activeOffsideLine = offsideLine(attackingSide);
 </script>
 
-<div class="pitch">
+<div class="pitch" style={`--field-inset: ${FIELD_INSET_PERCENT}%`}>
     <div class="pitch-grain"></div>
     <div class="mark mark--outline"></div>
     <div class="mark mark--half"></div>

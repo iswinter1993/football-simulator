@@ -179,13 +179,13 @@ dl {
 }
 
 .mark--outline {
-    inset: 7%;
+    inset: var(--field-inset);
     border: 1.5px solid var(--line);
 }
 
 .mark--half {
-    top: 7%;
-    bottom: 7%;
+    top: var(--field-inset);
+    bottom: var(--field-inset);
     left: 50%;
     width: 1.5px;
     background: var(--line);
@@ -222,12 +222,12 @@ dl {
 }
 
 .mark--home-box {
-    left: 7%;
+    left: var(--field-inset);
     border-left: 0;
 }
 
 .mark--away-box {
-    right: 7%;
+    right: var(--field-inset);
     border-right: 0;
 }
 
@@ -240,12 +240,12 @@ dl {
 }
 
 .mark--home-six {
-    left: 7%;
+    left: var(--field-inset);
     border-left: 0;
 }
 
 .mark--away-six {
-    right: 7%;
+    right: var(--field-inset);
     border-right: 0;
 }
 
@@ -267,8 +267,8 @@ dl {
 }
 
 .offside-line {
-    top: 7%;
-    bottom: 7%;
+    top: var(--field-inset);
+    bottom: var(--field-inset);
     z-index: 1;
     width: 2px;
     border-left: 2px dashed var(--coral);
